@@ -5,13 +5,13 @@ var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
-        A: "./index",
-        B: "./b",
-        C: "./c",
+        app: "./index",
+        B: "./b/b"
     },
     output: {
-        path: path.join(__dirname, "js"),
-        filename: "[name].bundle.js"
+        path: path.join(__dirname, "dist"),
+        filename: "[name].[hash].bundle.js",
+        chunkFilename: "[name].[chunkhash].chunk.js"
     },
     module: {
         loaders: [
@@ -36,10 +36,10 @@ module.exports = {
         new webpack.NoErrorsPlugin(),
         new CommonsChunkPlugin({
             name: "commons",
-            filename: "commons.js",
+            filename: "commons.[hash].js",
             chunks: ["A", "B"]
         }),
-        new ExtractTextPlugin("[name].css", { allchunks: true }),
+        new ExtractTextPlugin("[name].[contenthash].css", { allchunks: true }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             // template: 'index.html',

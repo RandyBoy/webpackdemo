@@ -1,3 +1,4 @@
 require("./style.css");
-require(["./chunk"]);
-require('./a.js');
+require(["./d/chunk"]);
+require(['./a/a.js']);
+require(['./c/c.js']);
